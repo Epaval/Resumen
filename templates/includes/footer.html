@@ -1,0 +1,188 @@
+<style>
+    /* Estilos generales del footer */
+.callout-contact {
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.callout-contact h3 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilos de enlaces de contacto */
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0.8rem 1.2rem;
+  background-color: #f0f8ff;
+  border: 1px solid #d0e7ff;
+  border-radius: 8px;
+  color: #0d47a1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  max-width: 400px;
+  margin: 0.5rem auto;
+  font-size: 1rem;
+}
+
+.contact-link:hover {
+  background-color: #e3f2fd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.15);
+}
+
+.contact-link .icon {
+  font-size: 1.4rem;
+}
+
+.email-link {
+  color: #0d47a1;
+  border-color: #d0e7ff;
+}
+
+.email-link:hover {
+  background-color: #e3f2fd;
+}
+
+.whatsapp-link {
+  background-color: #f0fff4;
+  border: 1px solid #b2fab4;
+  color: #1b5e20;
+}
+
+.whatsapp-link:hover {
+  background-color: #e8f5e8;
+}
+
+/* Toast de notificación */
+.toast-notification {
+  visibility: hidden;
+  opacity: 0;
+  min-width: 250px;
+  background-color: #0d47a1;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 12px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.toast-notification.show {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
+<div class="callout secondary callout-contact">
+  <div class="grid-x align-center text-center">
+    <!-- Título -->
+    <h4 class="cell small-12 large-7 text-center">Formulario de Contacto</h4>
+
+    <!-- Formulario -->
+    <form class="cell small-12 large-7" method="POST" action="{% url 'home_app:add-contact' %}">
+      {% csrf_token %}
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6">
+          <label for="full_name">Nombres
+            <input type="text" id="full_name" name="full_name" placeholder="Nombres completos..." required>
+          </label>
+        </div>
+        <div class="cell small-12 medium-6">
+          <label for="email">Correo
+            <input type="email" id="email" name="email" placeholder="tu@correo.com..." required>
+          </label>
+        </div>
+        <div class="cell small-12">
+          <label for="message">Mensaje
+            <textarea id="message" name="message" placeholder="Escribe tu mensaje aquí..." rows="1" required></textarea>
+          </label>
+        </div>
+        <div class="cell small-12 text-center">
+                    <button type="submit" class="submit button-expanded" style="
+                background-color: #0d47a1;
+                color: white;
+                font-size: 1.1rem;
+                font-weight: 500;
+                padding: 0.8rem 2rem;
+                border: none;
+                border-radius: 30px;
+                box-shadow: 0 4px 10px rgba(13, 71, 161, 0.3);
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                transition: all 0.3s ease;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            ">
+            📩 Enviar
+            </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Otras formas de contacto -->
+    <div class="contact-options-wrapper cell small-12 large-8" style="margin-top: 2.5rem;">
+      <p class="contact-title" style="font-size: 1.1rem; color: #333; margin-bottom: 1.2rem; font-weight: 600;">
+        Otras formas de contacto
+      </p>
+
+      <!-- Correo -->
+      <a href="#" onclick="copyToClipboard('julioz1126@gmail.com'); return false;"
+         class="contact-link email-link grid-x align-center"
+         title="Haz clic para copiar el correo">
+        <span class="icon">✉️</span>
+        <span class="text">julioz1126@gmail.com</span>
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/+584244388859?text=Gracias%20por%20comunicarte%20con%20Julio%20Pérez%20Delpino.%20Dime%20en%20qué%20área%20quieres%20automatizar%20tus%20procesos:%201.-%20Inventario%202.-%20Administración%203.-%20Recepción%20de%20mercancía"
+         target="_blank"
+         class="contact-link whatsapp-link grid-x align-center"
+         title="Abrir WhatsApp">
+        <span class="icon">📱</span>
+        <span class="text">WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Toast de notificación -->
+<div id="toast" class="toast-notification">
+  ¡Correo copiado al portapapeles!
+</div>
+
+<!-- Scripts -->
+<script>
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast(`Correo copiado: ${text}`);
+  }).catch(err => {
+    console.error('Error al copiar: ', err);
+    showToast('Error al copiar');
+  });
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+}
+</script>

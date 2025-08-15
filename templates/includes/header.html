@@ -1,0 +1,121 @@
+<!-- Header fijo (sticky) -->
+<header class="main-header" style="
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+">
+  <!-- Contenedor con márgenes internos y límites de ancho -->
+  <div class="grid-x grid-padding-x align-middle" style="
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+  ">
+    {% load static %}
+
+    <!-- Logo corporativo (derecha, oculto en móvil) -->
+    <div class="cell medium-6 large-4 show-for-medium text-right" style="padding-right: 1rem;">
+      <img src="{% static 'img/jp_logo2.jpg' %}" alt="Logo" style="
+        max-height: 80px;
+        width: auto;
+        object-fit: contain;
+      ">
+    </div>
+
+    <!-- Nombre / Logo (centrado en móvil, izquierda en desktop) -->
+    <div class="cell small-12 medium-6 large-4 text-center medium-text-left">
+      <a href="{% url 'home_app:index' %}" style="
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #0d47a1;
+        text-decoration: none;
+        font-family: 'Segoe UI', sans-serif;
+        letter-spacing: -0.5px;
+      ">
+        Julio Pérez Delpino
+      </a>
+      <div style="
+        font-size: 0.85rem;
+        color: #607d8b;
+        margin-top: 4px;
+      ">
+        Impulsa tu operación con automatización inteligente
+      </div>
+    </div>
+
+    <!-- Menú (botones alineados en desktop, apilados en móvil) -->
+<div class="cell small-12 large-4">
+  <nav style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.8rem 0;
+  ">
+
+    <!-- Botón: Inicio -->
+    <a href="{% url 'home_app:index' %}" class="nav-link" style="
+      background-color: #0d47a1;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.80rem;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
+      min-width: 100px;
+      text-align: center;
+    ">Inicio</a>
+
+    <!-- Botón: Blog -->
+    <a href="{% url 'entrada_app:entry-lista'%}" class="nav-link" style="
+      background-color: #0d47a1;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.80rem;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
+      min-width: 100px;
+      text-align: center;
+    ">Sección</a>
+
+    <!-- Botón: Acceder al Admin (en nueva pestaña) -->
+    <a href="{% url 'users_app:user-login' %}" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       style="
+      background-color: #0d47a1;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.80rem;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
+      min-width: 120px;
+      text-align: center;
+    ">Acceder</a>
+
+  </nav>
+</div>
+
+  <!-- Línea decorativa sutil -->
+  <div style="
+    height: 2px;
+    background: linear-gradient(to right, transparent, #0d47a1, transparent);
+    max-width: 1200px;
+    margin: 0 auto;
+  "></div>
+</header>
+
+<!-- Espacio para que el contenido no se oculte bajo el header fijo -->
+<div style="padding-top: 140px;"></div>

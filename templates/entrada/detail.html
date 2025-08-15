@@ -1,0 +1,31 @@
+<!-- head para PC -->
+{% extends "entrada/base_entrada.html" %}
+{% load  static %}
+
+{% block content %}
+
+{% include "includes/header.html" %}
+
+<div class="grid-container">
+    <div class="grid-x grid-margin-x" style="margin-top: 1em;">
+        <h3 class="cell">{{object.title}}</h3>
+
+        <!-- bloque de contenido del articulo -->
+        <div class="cell large-8">
+            <div class="cell callout primary">
+                <h5>Resumen:</h5>
+                <p>{{entry.resume}}</p>
+            </div>
+            <div>
+               <p>{{entry.content|safe}}</p>
+            </div>
+        </div>
+        <!-- FIN bloque contenido del articulo -->
+
+       
+
+    </div>
+</div>
+{% include "includes/footer.html" %}
+
+{% endblock content %}

@@ -1,0 +1,114 @@
+.header {
+    display: flex;
+    align-items: center;
+    background: #dfe6e9;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+.blog-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-favoritos {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: solid 1px green;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.card-favoritos-img {
+    width: 120px;
+    height: 120px;
+    margin-right: 1em;
+}
+
+/* Estilos generales del footer */
+.callout-contact {
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.callout-contact h3 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilos de enlaces de contacto */
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0.8rem 1.2rem;
+  background-color: #f0f8ff;
+  border: 1px solid #d0e7ff;
+  border-radius: 8px;
+  color: #0d47a1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  max-width: 400px;
+  margin: 0.5rem auto;
+  font-size: 1rem;
+}
+
+.contact-link:hover {
+  background-color: #e3f2fd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.15);
+}
+
+.contact-link .icon {
+  font-size: 1.4rem;
+}
+
+.email-link {
+  color: #0d47a1;
+  border-color: #d0e7ff;
+}
+
+.email-link:hover {
+  background-color: #e3f2fd;
+}
+
+.whatsapp-link {
+  background-color: #f0fff4;
+  border: 1px solid #b2fab4;
+  color: #1b5e20;
+}
+
+.whatsapp-link:hover {
+  background-color: #e8f5e8;
+}
+
+/* Toast de notificación */
+.toast-notification {
+  visibility: hidden;
+  opacity: 0;
+  min-width: 250px;
+  background-color: #0d47a1;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 12px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.toast-notification.show {
+  visibility: visible;
+  opacity: 1;
+}

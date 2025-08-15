@@ -1,0 +1,137 @@
+{% extends "users/base_users.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/header.html" %}
+
+<div class="grid-container">
+    <div class="grid-x align-center" style="margin-top: 3rem; margin-bottom: 3rem;">
+        <!-- Formulario centrado -->
+        <div class="cell medium-8 large-4">
+            <div class="card" style="
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                border: 1px solid #e0e0e0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            ">
+                <!-- Encabezado azul profesional -->
+                <div class="card-divider" style="
+                    background-color: #0d47a1;
+                    color: white;
+                    padding: 1.2rem 1.5rem;
+                    text-align: center;
+                ">
+                    <h4 style="margin: 0; font-weight: 600; font-size: 1.3rem;">Acceso de Usuario</h4>
+                </div>
+
+                <!-- Cuerpo del formulario -->
+                <div class="card-section" style="padding: 2rem;">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Email -->
+                        <div class="cell medium-12">
+                            <label style="
+                                font-weight: 500;
+                                color: #333;
+                                margin-bottom: 0.5rem;
+                                display: block;
+                            ">
+                                Correo electrónico
+                                <input type="email" name="email" placeholder="tucorreo@ejemplo.com" style="
+                                    width: 100%;
+                                    padding: 0.75rem;
+                                    border: 1px solid #ccc;
+                                    border-radius: 6px;
+                                    font-size: 1rem;
+                                    margin-top: 0.3rem;
+                                    outline: none;
+                                "
+                                onfocus="this.style.borderColor='#0d47a1';"
+                                onblur="this.style.borderColor='#ccc';"
+                                required>
+                            </label>
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div class="cell medium-12" style="margin-top: 0.8rem;">
+                            <label style="
+                                font-weight: 500;
+                                color: #333;
+                                margin-bottom: 0.5rem;
+                                display: block;
+                            ">
+                                Contraseña
+                                <input type="password" name="password" placeholder="Tu contraseña" style="
+                                    width: 100%;
+                                    padding: 0.75rem;
+                                    border: 1px solid #ccc;
+                                    border-radius: 6px;
+                                    font-size: 1rem;
+                                    margin-top: 0.3rem;
+                                    outline: none;
+                                "
+                                onfocus="this.style.borderColor='#0d47a1';"
+                                onblur="this.style.borderColor='#ccc';"
+                                required>
+                            </label>
+                        </div>
+
+                        <!-- Enlace de recuperación de contraseña
+                        <div class="cell medium-12" style="margin-top: 0.5rem; text-align: right;">
+                            <a href="#" style="
+                                font-size: 0.9rem;
+                                color: #0d47a1;
+                                text-decoration: none;
+                            ">¿Olvidaste tu contraseña?</a>
+                        </div> -->
+
+                        <!-- Botón Acceder -->
+                        <div class="cell medium-12" style="margin-top: 1.5rem;">
+                            <button type="submit" style="
+                                background-color: #0d47a1;
+                                color: white;
+                                border: none;
+                                padding: 0.8rem;
+                                font-size: 1.1rem;
+                                font-weight: 600;
+                                border-radius: 8px;
+                                cursor: pointer;
+                                width: 100%;
+                                transition: all 0.3s ease;
+                                box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
+                            "
+                            onmouseover="this.style.backgroundColor='#0b3d8f'; this.style.transform='translateY(-2px)';"
+                            onmouseout="this.style.backgroundColor='#0d47a1'; this.style.transform='none';">
+                                Acceder
+                            </button>
+                        </div>
+
+                        <!-- Botón Registrar (secundario) 
+                        <div class="cell medium-12" style="margin-top: 1rem; text-align: center;">
+                            <a href="#" style="
+                                display: block;
+                                padding: 0.75rem;
+                                color: #0d47a1;
+                                border: 1px solid #0d47a1;
+                                border-radius: 8px;
+                                text-decoration: none;
+                                font-weight: 500;
+                                font-size: 1rem;
+                                transition: all 0.3s ease;
+                            "
+                            onmouseover="this.style.backgroundColor='#f0f7ff';"
+                            onmouseout="this.style.backgroundColor='';">
+                                ¿No tienes cuenta? Regístrate
+                            </a>
+                        </div>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

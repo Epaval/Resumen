@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/myblog.css' %}">
+{% endblock css %}
+
+{% block js %}
+
+<!-- Notificación tipo Toptip (emerge arriba a la derecha) -->
+{% if messages %}
+  <div id="toptip" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 300px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border-left: 4px solid #43ac6a; /* por defecto verde */
+  ">
+    <div id="toptip-content">
+      {% for message in messages %}
+        <p style="margin: 0; display: flex; align-items: center; font-weight: 500;">
+          <span style="margin-right: 6px;">
+            {% if message.tags == 'error' %}
+              ❌
+            {% else %}
+              ✅
+            {% endif %}
+          </span>
+          <span>{{ message }}</span>
+        </p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toptip = document.getElementById("toptip");
+        const messages = [
+          {% for message in messages %}
+          "{{ message.tags }}",
+        {% endfor %}
+      ];
+
+      // Verificar si hay al menos un mensaje de error
+      const hasError = messages.some(tag => tag.trim() === 'error');
+
+      // Aplicar estilos según el tipo
+      if (hasError) {
+        toptip.style.borderLeftColor = '#e53935'; // rojo
+        // Opcional: cambiar color del texto de los <p> si lo deseas
+        const paragraphs = toptip.querySelectorAll('p');
+        paragraphs.forEach(p => p.style.color = '#c62828');
+      } else {
+        toptip.style.borderLeftColor = '#43ac6a'; // verde
+      }
+
+      // Animación de entrada
+      setTimeout(() => {
+        toptip.style.opacity = '1';
+        toptip.style.transform = 'translateY(0)';
+      }, 100);
+
+      // Animación de salida (3 segundos)
+      setTimeout(() => {
+        toptip.style.opacity = '0';
+        toptip.style.transform = 'translateY(-10px)';
+        // Eliminar del DOM después de la transición
+        setTimeout(() => {
+          if (toptip && toptip.parentNode) {
+            toptip.remove();
+          }
+        }, 300);
+      }, 3000);
+    });
+  </script>
+{% endif %}
+
+{% endblock js %}
