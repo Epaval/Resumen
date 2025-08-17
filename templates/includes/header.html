@@ -1,11 +1,26 @@
+<style>
+  .logo-responsive {
+    max-height: 60px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  @media (min-width: 640px) {
+    .logo-responsive {
+      max-height: 80px;
+    }
+  }
+</style>
+
 <!-- Header fijo (sticky) -->
-<header class="main-header" style="
+<header id="main-header" class="main-header" style="
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 999;
   background-color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 ">
   <!-- Contenedor con márgenes internos y límites de ancho -->
   <div class="grid-x grid-padding-x align-middle" style="
@@ -16,17 +31,13 @@
   ">
     {% load static %}
 
-    <!-- Logo corporativo (derecha, oculto en móvil) -->
-    <div class="cell medium-6 large-4 show-for-medium text-right" style="padding-right: 1rem;">
-      <img src="{% static 'img/jp_logo2.jpg' %}" alt="Logo" style="
-        max-height: 80px;
-        width: auto;
-        object-fit: contain;
-      ">
+    <!-- Logo (centrado en móvil, izquierda en desktop) -->
+    <div class="cell small-12 medium-4 text-center medium-text-left">
+      <img src="{% static 'img/jp_logo2.jpg' %}" alt="Logo" class="logo-responsive">
     </div>
 
-    <!-- Nombre / Logo (centrado en móvil, izquierda en desktop) -->
-    <div class="cell small-12 medium-6 large-4 text-center medium-text-left">
+    <!-- Nombre (centrado en móvil, centro en desktop) -->
+    <div class="cell small-12 medium-4 text-center">
       <a href="{% url 'home_app:index' %}" style="
         font-size: 1.6rem;
         font-weight: 700;
@@ -41,76 +52,88 @@
         font-size: 0.85rem;
         color: #607d8b;
         margin-top: 4px;
+        text-align: center;
       ">
-        Impulsa tu operación con automatización inteligente
+        Impulsa tus operaciones con automatizaciones inteligente
       </div>
     </div>
 
-    <!-- Menú (botones alineados en desktop, apilados en móvil) -->
-<div class="cell small-12 large-4">
-  <nav style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    padding: 0.8rem 0;
-  ">
+    <!-- Botón hamburguesa (solo en móvil, alineado a la derecha) -->
+    <div class="cell small-4 text-left hide-for-medium" style="padding-top: 0.5rem;">
+      <button id="menu-toggle" style="
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #0d47a1;
+        padding: 0.5rem;
+      ">&#9776;</button>
+    </div>
 
-    <!-- Botón: Inicio -->
-    <a href="{% url 'home_app:index' %}" class="nav-link" style="
-      background-color: #0d47a1;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 20px;
-      font-size: 0.80rem;
-      font-weight: 400;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
-      min-width: 100px;
-      text-align: center;
-    ">Inicio</a>
+    <!-- Menú de navegación -->
+    <div class="cell small-12 medium-4" id="main-menu">
+      <nav style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding: 0.8rem 0;
+      ">
+        <!-- Botón: Inicio -->
+        <a href="{% url 'home_app:index' %}" class="nav-link" style="
+          background-color: #0d47a1;
+          color: white;
+          padding: 0.6rem 1.2rem;
+          border-radius: 20px;
+          font-size: 0.80rem;
+          font-weight: 400;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
+          min-width: 100px;
+          text-align: center;
+        ">Inicio</a>
 
-    <!-- Botón: Blog -->
-    <a href="{% url 'entrada_app:entry-lista'%}" class="nav-link" style="
-      background-color: #0d47a1;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 20px;
-      font-size: 0.80rem;
-      font-weight: 400;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
-      min-width: 100px;
-      text-align: center;
-    ">Sección</a>
+        <!-- Botón: Blog -->
+        <a href="{% url 'entrada_app:entry-lista' %}" class="nav-link" style="
+          background-color: #0d47a1;
+          color: white;
+          padding: 0.6rem 1.2rem;
+          border-radius: 20px;
+          font-size: 0.80rem;
+          font-weight: 400;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
+          min-width: 100px;
+          text-align: center;
+        ">Sección</a>
 
-    <!-- Botón: Acceder al Admin (en nueva pestaña) -->
-    <a href="{% url 'users_app:user-login' %}" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       style="
-      background-color: #0d47a1;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 20px;
-      font-size: 0.80rem;
-      font-weight: 400;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
-      min-width: 120px;
-      text-align: center;
-    ">Acceder</a>
-
-  </nav>
-</div>
+        <!-- Botón: Acceder al Admin -->
+        <a href="{% url 'users_app:user-login' %}"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="
+          background-color: #0d47a1;
+          color: white;
+          padding: 0.6rem 1.2rem;
+          border-radius: 20px;
+          font-size: 0.80rem;
+          font-weight: 400;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
+          min-width: 120px;
+          text-align: center;
+        ">Acceder</a>
+      </nav>
+    </div>
+  </div>
 
   <!-- Línea decorativa sutil -->
   <div style="
-    height: 2px;
+    height: 3px;
     background: linear-gradient(to right, transparent, #0d47a1, transparent);
     max-width: 1200px;
     margin: 0 auto;
@@ -119,3 +142,373 @@
 
 <!-- Espacio para que el contenido no se oculte bajo el header fijo -->
 <div style="padding-top: 140px;"></div>
+
+<!-- Script: Menú hamburguesa + Scroll (ocultar/mostrar header) -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.getElementById("main-header");
+    const menuToggle = document.getElementById("menu-toggle");
+    const mainMenu = document.getElementById("main-menu");
+    const nav = mainMenu.querySelector("nav");
+
+    let lastScrollTop = 0;
+    const headerHeight = header.offsetHeight;
+
+    // Ocultar menú en móvil por defecto
+    if (window.innerWidth < 640) {
+      nav.style.display = "none";
+    }
+
+    // Alternar menú hamburguesa
+    menuToggle.addEventListener("click", function () {
+      if (nav.style.display === "flex") {
+        nav.style.display = "none";
+      } else {
+        nav.style.display = "flex";
+      }
+    });
+
+    // Comportamiento del header al hacer scroll
+    window.addEventListener("scroll", function () {
+      const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScrollTop <= 0) {
+        // Solo mostrar el header si está en la parte superior absoluta
+        header.style.transform = "translateY(0)";
+      } else if (currentScrollTop > lastScrollTop) {
+        // Scroll hacia abajo → ocultar header inmediatamente
+        header.style.transform = `translateY(-${headerHeight}px)`;
+      }
+      // No hacemos nada si el scroll es hacia arriba (no lo mostramos hasta llegar al top)
+
+      lastScrollTop = currentScrollTop;
+    });
+
+    // Ajustar menú al cambiar tamaño de pantalla
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= 640) {
+        nav.style.display = "flex"; // Siempre visible en desktop
+      } else {
+        nav.style.display = "none"; // Oculto por defecto en móvil
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

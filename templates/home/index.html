@@ -9,7 +9,7 @@
 
   <!-- Primer bloque: Destacado (izquierda) + Secundarios (derecha) -->
   <section class="grid-x grid-margin-x" style="margin-top: 2rem; margin-bottom: 3rem;">
-    
+
     <!-- ✅ ARTÍCULO DESTACADO - Lado izquierdo (en desktop) -->
     <div class="cell small-12 large-6">
       <div class="card" style="
@@ -19,11 +19,11 @@
         height: 100%;
         transition: transform 0.3s ease;
           " onmouseover="this.style.transform='scale(1.01)';" onmouseout="this.style. transform='none';">
-            <img 
+            <img
               src="{{ portada.image.url }}"
               srcset="
                 {{ portada.image.url }} 300w,
-                
+
               "
               sizes="(max-width: 600px) 300px, 800px"
               alt="{{ portada.title }}"
@@ -34,13 +34,13 @@
             {{ portada.title }}
           </a></h3>
           <p style="color: #555; line-height: 1.6;">{{ portada.resume | truncatechars:120 }}</p>
-          <a href="#" class="button small" style="
+          <a href="{% url 'entrada_app:entry-detail' portada.id %}" class="button small" style="
             background-color: #0d47a1;
             border-radius: 20px;
             padding: 0.5rem 1.2rem;
             font-size: 0.9rem;
             margin-top: 0.8rem;
-          ">Leer más</a>
+          ">👉 Ver detalles</a>
         </div>
       </div>
     </div>
@@ -51,6 +51,7 @@
         {% for entrada in entradas_home %}
           <div class="cell small-12">
             <div class="callout" style="
+              margin-top: 3rem;
               display: flex;
               gap: 1rem;
               background: white;
@@ -66,7 +67,7 @@
                   {{ entrada.title }}
                 </a></h5>
                 <p style="margin: 0; color: #666; font-size: 0.9rem;">{{ entrada.resume | truncatechars:40 }}</p>
-                <a href="#" style="color: #0d47a1; font-size: 0.9rem; text-decoration: none;">→ Leer artículo</a>
+                <a href="{% url 'entrada_app:entry-detail' entrada.id %}" style="color: #0d47a1; font-size: 0.9rem; text-decoration: none;">👀 Conoce más</a>
               </div>
             </div>
           </div>
@@ -84,9 +85,19 @@
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     ">
-      <h4 style="color: #0d47a1; margin-top: 0;">Optimiza tu almacén con tecnología inteligente 🚀</h4>
-      <p style="color: #444; font-size: 1.1rem; max-width: 600px; margin: 0 auto 1.5rem;">
-         Si buscas automatizar la gestión de inventario, agilizar la recepción de mercancía y contar con un mapa interactivo de tu almacén, estás en el lugar correcto. Déjame tu correo y te enviaré propuestas diseñadas para mejorar tu eficiencia y maximizar resultados.</p>
+      <h4 style="color: #0d47a1; margin-top: 0;">Optimiza tus operaciones con tecnología inteligente 🚀</h4>
+            <p style="color: #444; font-size: 1.1rem; max-width: 600px; margin: 0 auto 1.5rem;">
+              ⚡ Impulsa tu operación con automatización inteligente.<br>
+              ¿Inventario lento? ¿Recepción desordenada? ¿Almacén sin control?<br><br>
+              Ofrecemos soluciones prácticas para digitalizar y automatizar tus procesos clave:
+             <ul style="margin-left: 1.2rem; padding-left: 0.5rem; list-style-type: none;">
+                <li style="--i: 1;">📦 Inventario en tiempo real</li>
+                <li style="--i: 2;">🗺️ Mapa interactivo del almacén</li>
+                <li style="--i: 3;">🚚 Recepción ágil de mercancía</li>
+             </ul>
+              💡 Más eficiencia, menos errores.<br>
+              👉 Déjame tu correo y te envío propuestas que realmente funcionan.
+            </p>
       <button class="button" data-open="modal-suscripcion" style="
         background-color: #0d47a1;
         padding: 0.8rem 2rem;
@@ -101,39 +112,40 @@
 <div class="reveal" id="modal-suscripcion" data-reveal style="max-width: 400px; border-radius: 12px; overflow: hidden;">
   <div style="padding: 1.5rem; text-align: center;">
     <h5 style="color: #0d47a1; margin-top: 0;">Ingresa tu correo</h5>
-    <p style="color: #666;">Recibe nuestros artículos directamente en tu bandeja.</p>
+    <p style="color: #666;">💬 Te enviamos la propuesta directo a tu bandeja, sin rodeos.</p>
 
     <!-- Formulario que apunta a tu URL de procesamiento -->
     <form method="POST" action="{% url 'home_app:add-suscription' %}">
       {% csrf_token %}
       <div class="input-group" style="margin-bottom: 1rem;">
-        <input 
-          type="email" 
-          name="email" 
-          placeholder="tu@correo.com" 
-          required 
+        <input
+          type="email"
+          name="email"
+          placeholder="tu@correo.com"
+          required
           style="
             border: 1px solid #ccc;
             border-radius: 6px;
             padding: 0.7rem;
             width: 100%;
             outline: none;
-          " 
-          onfocus="this.style.borderColor='#0d47a1';" 
+          "
+          onfocus="this.style.borderColor='#0d47a1';"
           onblur="this.style.borderColor='#ccc';"
         >
       </div>
-      <button 
-        type="submit" 
-        class="button success" 
+      <button
+        type="submit"
+        class="button success"
         style="
           background-color: #0d47a1;
           padding: 0.7rem 2rem;
           border-radius: 25px;
           width: 100%;
           font-size: 1rem;
+          color: #e3f2fd;
         ">
-        Suscribirme
+       📩 Enviar
       </button>
     </form>
   </div>
@@ -160,7 +172,7 @@
             <div class="card-section" style="padding: 1.2rem;">
               <h4><a href="{% url 'entrada_app:entry-detail' entrada.id %}" style="font-size: 1.2rem; color: #333; margin: 0.5rem 0;">{{entrada.title | truncatechars:40 }}</a></h4>
               <p style="color: #666; line-height: 1.5;">{{ entrada.resume | truncatechars:70 }}</p>
-              <a href="#" class="button hollow" style="
+              <a href="{% url 'entrada_app:entry-detail' entrada.id %}" class="button hollow" style="
                 border-color: #0d47a1;
                 color: #0d47a1;
                 font-size: 0.9rem;
